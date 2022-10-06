@@ -3,6 +3,31 @@
 let playerScore = 0;
 let computerScore = 0;
 
+let playerChoice = ""
+let compChoice = ""
+
+const choiceRock = document.getElementById("rockButton")
+const choicePaper = document.getElementById("paperButton")
+const choiceScissors = document.getElementById("scissorsButton")
+
+document.addEventListener("mouseover", (e) => {
+    if (e.target === choiceRock || e.target === choicePaper || e.target === choiceScissors) {
+        e.target.style.scale = (1.1,1.1);
+    }
+}, false);
+
+document.addEventListener("mouseout", (e) => {
+    if (e.target === choiceRock || e.target === choicePaper || e.target === choiceScissors) {
+        e.target.style.scale = (1,1);
+    }
+}, false);
+
+document.addEventListener("onclick", (e) => {
+    if (e.target === choiceRock) {
+        playerChoice = ""
+    }
+}, false);
+
 function playerSelection(choice) {
     gameDirector(choice, computerSelection);
 }
