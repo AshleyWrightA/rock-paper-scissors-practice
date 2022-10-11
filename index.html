@@ -9,21 +9,26 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-    <div class="header">Rock Paper Scissors</div>
+    <div class="header">
+        <div class="h-score">Player Score</div>
+        <div class="h-title">Rock Paper Scissors</div>
+        <div class="h-score">Computer Score</div>
+    </div>
     <div class="upper">
         <div class="scoreBox">
-            <div class="playerScore">0</div>
-            <div class="computerScore">0</div>
+            <div id="playerDisplayedScore">0</div>
+            <div id="computerDisplayedScore">0</div>
         </div>
         <div class="choiceBox">
-            <div class="playerChoice">Rock</div>
-            <div class="computerChoice">Rock</div>
+            <div id="activePlayerChoice"></div>
+            <div id="gameState"></div>
+            <div id="activeComputerChoice"></div>
         </div>
     </div>
     <div class="lower">
-        <button id="rockButton">Rock</button>
-        <button id="paperButton">Paper</button>
-        <button id="scissorsButton">Scissors</button>
+        <button id="rockButton" class="btn">Rock</button>
+        <button id="paperButton" class="btn">Paper</button>
+        <button id="scissorsButton" class="btn">Scissors</button>
     </div>
 </body>
 </html>

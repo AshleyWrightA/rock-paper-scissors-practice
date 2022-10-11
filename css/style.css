@@ -3,7 +3,7 @@ body {
     margin:0px;
 }
 
-button {
+.btn {
     background-color: white;
     width: 200px;
     height: 200px;
@@ -13,9 +13,17 @@ button {
     font-size: 36px;
 }
 
+.btn:active {
+    scale: 0.9;
+}
+
+.btn:hover {
+    background-color: lightblue;
+}
+
 .header {
     display: flex;
-    justify-content: center;
+    justify-content:space-between;
     height: 80px;
     background-color: black;
     color: white;
@@ -23,6 +31,8 @@ button {
     font-size: 32px;
     font-weight: bold;
     align-items: center;
+    padding-left: 20px;
+    padding-right: 20px ;
 }
 
 .upper {
@@ -32,15 +42,24 @@ button {
 
 .choiceBox {
     display:flex;
-    justify-content:space-around;
+    justify-content:space-between;
     align-items: center;
+    font-size: 50px;
     height: 300px;
+    color: white;
+    padding-left: 120px;
+    padding-right: 120px;
 }
 
 .scoreBox {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 36px;
     height: 120px;
+    padding-left: 120px;
+    padding-right: 120px;
 }
 
 .playerScore,

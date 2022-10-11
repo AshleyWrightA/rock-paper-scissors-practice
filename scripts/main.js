@@ -1,71 +1,78 @@
 "use strict";
 
-let playerScore = 0;
-let computerScore = 0;
+const rock = "Rock"
+const paper = "Paper"
+const scissors = "Scissors"
 
-let playerChoice = ""
-let compChoice = ""
+const playerDisplayedScore = document.getElementById("playerDisplayedScore");
+const computerDisplayedScore = document.getElementById("computerDisplayedScore");
 
 const choiceRock = document.getElementById("rockButton")
 const choicePaper = document.getElementById("paperButton")
 const choiceScissors = document.getElementById("scissorsButton")
 
-document.addEventListener("mouseover", (e) => {
-    if (e.target === choiceRock || e.target === choicePaper || e.target === choiceScissors) {
-        e.target.style.scale = (1.1,1.1);
-    }
-}, false);
+const activePlayerChoice = document.getElementById("activePlayerChoice");
+const gameState = document.getElementById("gameState");
+const activeComputerChoice = document.getElementById("activeComputerChoice");
 
-document.addEventListener("mouseout", (e) => {
-    if (e.target === choiceRock || e.target === choicePaper || e.target === choiceScissors) {
-        e.target.style.scale = (1,1);
-    }
-}, false);
+console.log(activeComputerChoice.textContent)
 
-document.addEventListener("onclick", (e) => {
+let playerSelection = "";
+let computerSelection = ""; 
+
+let playerScore = 0
+let computerScore = 0
+
+document.addEventListener("click", (e) => {
     if (e.target === choiceRock) {
-        playerChoice = ""
+        playerSelection = rock
     }
+    else if (e.target === choicePaper) {
+        playerSelection = paper
+    }
+    else if (e.target === choiceScissors) {
+        playerSelection = scissors
+    }
+    gameDirector(playerSelection, getComputerChoice());
 }, false);
 
-function playerSelection(choice) {
-    gameDirector(choice, computerSelection);
+function getComputerChoice() {
+    let choiceList = [rock, paper, scissors];
+    let index = Math.floor(Math.random() * choiceList.length);
+    computerSelection =  choiceList[index]
+    return computerSelection;
 }
 
-function computerSelection() {
-    let computerChoice = ["rock", "paper", "scissors"];
-    let index = Math.floor(Math.random() * computerChoice.length);
-    return computerChoice[index];
-}
+const gameDirector = (playerSelection, computerSelection) =>  {
 
-let gameDirector = (playerChoice, computerChoice) =>  {
-
-    if (!validatePlayerSelection(playerChoice)) {
-        return
+    if (playerSelection == computerSelection) {
+        //Draw
+        updateSelections();
+        gameState.textContent = "Draw"
+        activePlayerChoice = playerSelection;
     }
-
-    if (playerChoice == computerChoice) {
-        console.log("You chose " + playerChoice + " and the computer chose " + computerChoice + ".")
-        console.log("Its a draw!")
-    }
-    else if ( (playerChoice == "rock" && computerChoice == "paper")
-    || (playerChoice == "paper" && computerChoice == "scissors") 
-    || (playerChoice == "scissors" && computerChoice == "rock")) {
-        console.log("You chose " + playerChoice + " and the computer chose " + computerChoice + ".")
-        console.log("You Lose.")
+    else if ( (playerSelection == rock && computerSelection == paper)
+    || (playerSelection == paper && computerSelection == scissors) 
+    || (playerSelection == scissors && computerSelection == rock)) {
+        //Computer Wins
+        updateSelections();
+        gameState.textContent = "Computer Wins."
         computerScore += 1;
-        console.log("The computers score is " + computerScore + ". Your score is " + playerScore + ".")
-    }
-    else if ( (playerChoice == "rock" && computerChoice == "scissors")
-    || (playerChoice == "paper" && computerChoice == "rock")
-    || (playerChoice == "scissors" && computerChoice == "paper")) {
-        console.log("You chose " + playerChoice + ". and the computer chose " + computerChoice + ".")
-        console.log("You Win!")
-        playerScore += 1;
-        console.log("Your score is " + playerScore + ". The computers score is " + computerScore + ".")
+        computerDisplayedScore.textContent = computerScore;
 
     }
-    else if (playerChoice == "quit") {
-        playGame = False;
+    else if ( (playerSelection == rock && computerSelection == scissors)
+    || (playerSelection == paper && computerSelection == rock)
+    || (playerSelection == scissors && computerSelection == paper)) {
+        //Player Wins
+        updateSelections();
+        gameState.textContent = "You Win."
+        playerScore += 1;
+        playerDisplayedScore.textContent = playerScore;
     }
+}
+
+const updateSelections = () => {
+    activePlayerChoice.textContent = playerSelection;
+    activeComputerChoice.textContent = computerSelection;
 }
